@@ -1,0 +1,14 @@
+<template>
+    <lightning-card
+        title=""
+        icon-name="custom:custom30">
+        <div class="slds-m-around_medium">
+            <template lwc:if={Image__c}>
+                <img src={Image__c} alt="movie photo" width="400" height="500"/>
+            </template>
+            <p>{Name}</p>
+            <p>{Category__c}</p>
+            <p>{Description__c}</p>
+        </div>
+    </lightning-card>
+</template>
