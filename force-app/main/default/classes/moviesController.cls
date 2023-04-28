@@ -17,9 +17,8 @@ public with sharing class moviesController {
 
         return moviesList;
     }
-
-    @AuraEnabled(cacheable=true)
-    public static void createMovie(NewMovie movie, List<String> actors){
+    @AuraEnabled(Cacheable=false)
+    public static void createMovie(NewMovie movie, List<String> actorsIds){
 
         Movie__c newMovieToinsert = new Movie__c();
 
@@ -28,23 +27,21 @@ public with sharing class moviesController {
         newMovieToinsert.Description__c = movie.description;
         newMovieToinsert.ReleaseDate__c = movie.releaseDate;
     
-        System.debug('newMovieToinsert 1' + newMovieToinsert);
         insert newMovieToinsert;
-        System.debug('newMovieToinsert 2' + newMovieToinsert);
-
     
         List<MovieActor__c> movieActorsToinsert  = new List<MovieActor__c>();
 
-        for(String actorId : actors){
+        Map<Id, Actor__c> actors = new Map<Id,Actor__c>([SELECT Id, Name FROM Actor__c WHERE Id IN: actorsIds]);
+
+        for(String actorId : actorsIds){
 
             MovieActor__c movieActor = new MovieActor__c();
 
+            movieActor.name = newMovieToinsert.Name + '_' + actors.get(actorId).Name;
             movieActor.Actor__c = actorId;
             movieActor.Movie__c = newMovieToinsert.Id;
             movieActorsToinsert.add(movieActor);
         }
-
-        System.debug('newMovieToinsert 3' + movieActorsToinsert);
 
 
         insert movieActorsToinsert;

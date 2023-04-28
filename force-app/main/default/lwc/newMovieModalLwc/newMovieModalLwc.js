@@ -62,10 +62,14 @@ export default class NewMovieModalLwc extends LightningElement {
         createMovie({movie:this.newMovie ,actors:JSON.stringify(this.movieActors)})
                    .then(result =>{
                        console.log('result'+result);
+                       this.closeModal();
                    })
                    .catch(error =>{
                        console.log('error'+error);
+                       this.closeModal();
                    })
+
+        
     }
 
     displayMessage(msg,t){
@@ -74,6 +78,11 @@ export default class NewMovieModalLwc extends LightningElement {
             message: msg,
             variant: 'Warning',
         });
+        this.dispatchEvent(ev);
+    }
+
+    closeModal(){
+        const ev = new CustomEvent('closemodalevent', { });
         this.dispatchEvent(ev);
     }
 }
