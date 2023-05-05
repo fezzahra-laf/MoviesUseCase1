@@ -59,7 +59,7 @@ export default class NewMovieModalLwc extends LightningElement {
     handleCreateMovie(){
         this.handleAddActor();
         console.log(JSON.stringify(this.movieActors));
-        createMovie({movie:this.newMovie ,actors:JSON.stringify(this.movieActors)})
+        createMovie({movie:this.newMovie ,actorsIds:JSON.stringify(this.movieActors)})
                    .then(result =>{
                        console.log('result'+result);
                        this.closeModal();

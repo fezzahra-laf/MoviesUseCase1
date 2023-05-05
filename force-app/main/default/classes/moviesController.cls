@@ -43,7 +43,6 @@ public with sharing class moviesController {
             movieActorsToinsert.add(movieActor);
         }
 
-
         insert movieActorsToinsert;
     }
 
