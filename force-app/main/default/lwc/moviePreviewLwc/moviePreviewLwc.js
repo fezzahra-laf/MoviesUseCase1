@@ -9,7 +9,7 @@ import ID_FIELD from '@salesforce/schema/Movie__c.Id';
 import NAME_FIELD from '@salesforce/schema/Movie__c.Name';
 import CATEGORY_FIELD from '@salesforce/schema/Movie__c.Category__c';
 import DESCRIPTION_FIELD from '@salesforce/schema/Movie__c.Description__c';
-import IMAGE_FIELD from '@salesforce/schema/Movie__c.Image__c';
+import IMAGE_FIELD from '@salesforce/schema/Movie__c.ContentDocumentId__c';
 
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import MOVIE_OBJECT from '@salesforce/schema/Movie__c';

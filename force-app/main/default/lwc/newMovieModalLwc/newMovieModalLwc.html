@@ -17,6 +17,10 @@
               <lightning-textarea     label="Description" field-name="Description__c" value={description}  onchange={handleChangeDesc}> </lightning-textarea>
               <lightning-input-field  field-name="Category__c" value={category}  onchange={handleChangeCategory}> </lightning-input-field>
               <lightning-input-field  field-name="ReleaseDate__c" value={releaseDate}  onchange={handleChangeReleaseDate}> </lightning-input-field>
+              <lightning-input label="Movie Poster" type="file" accept=".jpg, .jpeg, .tif, .png" onchange={openfileUpload}></lightning-input>
+              <template if:true={fileData}>
+                  <p>{fileData.filename}</p>
+              </template>
             </lightning-record-edit-form>
 
             <div class="slds-grid slds-gutters">

@@ -15,6 +15,11 @@ export default class NewMovieModalLwc extends LightningElement {
         releaseDate:new Date(),
     };
 
+    fileData= {
+        'filename': '',
+        'base64': '',
+    }
+
     handleChangeName(event) {
         this.newMovie.name = event.target.value;
     }  
@@ -30,6 +35,19 @@ export default class NewMovieModalLwc extends LightningElement {
     handleChangeReleaseDate(event) {
         this.newMovie.releaseDate = event.target.value;
     }  
+
+    openfileUpload(event) {
+        const file = event.target.files[0]
+            var reader = new FileReader()
+            reader.onload = () => {
+                var base64 = reader.result.split(',')[1]
+                this.fileData = {
+                    'filename': file.name,
+                    'base64': base64
+                }
+            }
+            reader.readAsDataURL(file)
+    }
 
     handleChangeActor(event){
         this.selectedActor = event.target.value;
@@ -59,7 +77,7 @@ export default class NewMovieModalLwc extends LightningElement {
     handleCreateMovie(){
         this.handleAddActor();
         console.log(JSON.stringify(this.movieActors));
-        createMovie({movie:this.newMovie ,actorsIds:JSON.stringify(this.movieActors)})
+        createMovie({movie:this.newMovie ,actorsIds:JSON.stringify(this.movieActors), base64:this.fileData.base64, filename:this.fileData.filename})
                    .then(result =>{
                        console.log('result'+result);
                        this.closeModal();
